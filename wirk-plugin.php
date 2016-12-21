@@ -70,4 +70,29 @@ function demo_sample_taxonomies() {
     register_taxonomy( 'demo_sample_category', 'demo_sample', $args );
 }
 add_action( 'init', 'demo_sample_taxonomies', 0 );
+
+// ADD Metaboxes
+
+add_action( 'add_meta_boxes', 'demo_description_box' );
+function demo_description_box() {
+    add_meta_box(
+        'demo_category_box',
+        __( 'Demo Category', 'myplugin_textdomain' ),
+        'demo_description_box_content',
+        'demo_sample',
+        'normal',
+        'low'
+    );
+}
+
+function demo_description_box_content( $post ) {
+    wp_nonce_field( plugin_basename( __FILE__ ), 'ddemo_description_box_nonce' );
+    echo '<label for="demo_description"></label>';
+    echo '<input type="text" id="demo_description" name="demo_description" placeholder="Enter the Demo Description" />';
+    echo '<textarea rows="4" cols="50">
+At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
+</textarea>';
+}
+
+
 ?>
