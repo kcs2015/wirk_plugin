@@ -47,4 +47,27 @@ function remove_demo_sample_posttype(){
 register_deactivation_hook(__FILE__, 'remove_demo_sample_posttype');
 
 //register_uninstall_hook( );
+
+// Add taxonomies to Demo Sample
+function demo_sample_taxonomies() {
+    $labels = array(
+        'name'              => _x( 'Demo Categories', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Demo Category', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Demo Categories' ),
+        'all_items'         => __( 'All Demo Categories' ),
+        'parent_item'       => __( 'Parent Demo Category' ),
+        'parent_item_colon' => __( 'Parent Demo Category:' ),
+        'edit_item'         => __( 'Edit Demo Category' ),
+        'update_item'       => __( 'Update Demo Category' ),
+        'add_new_item'      => __( 'Add New Demo Category' ),
+        'new_item_name'     => __( 'New Demo Category' ),
+        'menu_name'         => __( 'Demo Categories' ),
+    );
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => true,
+    );
+    register_taxonomy( 'demo_sample_category', 'demo_sample', $args );
+}
+add_action( 'init', 'demo_sample_taxonomies', 0 );
 ?>
