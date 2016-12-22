@@ -73,25 +73,57 @@ add_action( 'init', 'demo_sample_taxonomies', 0 );
 
 // ADD Metaboxes
 
-add_action( 'add_meta_boxes', 'demo_description_box' );
-function demo_description_box() {
+add_action( 'add_meta_boxes', 'demo_sample_description_box' );
+function demo_sample_description_box() {
     add_meta_box(
-        'demo_category_box',
-        __( 'Demo Category', 'myplugin_textdomain' ),
+        'demo_description_box',
+        __( 'Demo Description', 'myplugin_textdomain' ),
         'demo_description_box_content',
         'demo_sample',
         'normal',
         'low'
     );
+
+    add_meta_box(
+        'demo_instruction_box',
+        __( 'Demo Instruction', 'myplugin_textdomain' ),
+        'demo_instruction_box_content',
+        'demo_sample',
+        'normal',
+        'low'
+    );
+
+    add_meta_box(
+        'demo_shortcode_box',
+        __( 'Demo Shortcode', 'myplugin_textdomain' ),
+        'demo_shortcode_box_content',
+        'demo_sample',
+        'side',
+        'low'
+    );
+
+
 }
 
 function demo_description_box_content( $post ) {
-    wp_nonce_field( plugin_basename( __FILE__ ), 'ddemo_description_box_nonce' );
-    echo '<label for="demo_description"></label>';
-    echo '<input type="text" id="demo_description" name="demo_description" placeholder="Enter the Demo Description" />';
-    echo '<textarea rows="4" cols="50">
+    wp_nonce_field( plugin_basename( __FILE__ ), 'demo_description_box_nonce' );
+
+    echo 'Enter a quick description of what the demo sample does: <br><textarea rows="4" cols="100">
 At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
 </textarea>';
+}
+function demo_instruction_box_content( $post ) {
+    wp_nonce_field( plugin_basename( __FILE__ ), 'demo_instruction_box_nonce' );
+
+    echo 'Enter instructions explaining to the the visitor how use the demo: <br><textarea rows="4" cols="100">
+ 
+</textarea>';
+}
+function demo_shortcode_box_content( $post ) {
+    wp_nonce_field( plugin_basename( __FILE__ ), 'demo_shortcode_box_nonce' );
+
+    echo 'Create a shortcode id for this the demo sample (i.e. - sku-cat-page-insert): <br><label for="demo_description"></label>';
+    echo '<input type="text" id="demo_description" name="demo_description" placeholder="Enter the shortcode" />';
 }
 
 
