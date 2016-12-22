@@ -110,6 +110,7 @@ function demo_description_box_content( $post ) {
 
     wp_nonce_field( 'update_demo_description', 'demo_description_box_nonce' );
 
+    $saved_demo_description = '';
     // Get Saved Meta
     if (isset($GLOBALS["saved_demo_meta"]['demo_description'][0])){
         $saved_demo_description = $GLOBALS["saved_demo_meta"]['demo_description'][0] ;
@@ -122,10 +123,9 @@ function demo_instruction_box_content( $post ) {
     wp_nonce_field( 'update_demo_instruction', 'demo_instruction_box_nonce' );
 
     //Get Saved Meta
+    $saved_demo_instruction ='';
     if (isset($GLOBALS["saved_demo_meta"]['demo_instruction'][0])){
         $saved_demo_instruction = $GLOBALS["saved_demo_meta"]['demo_instruction'][0] ;
-    } else{
-        $saved_demo_instruction ='';
     }
 
   echo 'Enter instructions explaining to the the visitor how use the demo: <br><textarea id="demo_instruction" name="demo_instruction" rows="4" cols="100">' .$saved_demo_instruction .' 
@@ -135,10 +135,9 @@ function demo_shortcode_box_content( $post ) {
     wp_nonce_field( 'update_demo_shortcode', 'demo_shortcode_box_nonce' );
 
     //Get Saved Meta
+    $saved_demo_shortcode ='';
     if (isset($GLOBALS["saved_demo_meta"]['demo_shortcode'][0])){
         $saved_demo_shortcode = $GLOBALS["saved_demo_meta"]['demo_shortcode'][0] ;
-    }else{
-        $saved_demo_shortcode ='';
     }
 
     echo 'Create a shortcode id for this the demo sample (i.e. - sku-cat-page-insert): <br><label for="demo_shortcode"></label>';
