@@ -213,8 +213,52 @@ add_action( 'save_post', 'demo_sample_save_meta', 10, 3 );
 /* ======= WOOCOMMERCE UPDATES =======*/
 /* ==============================*/
 
-/* ADD COLUMN TO WOOCOMMERCE */
+/* ADD COLUMNs TO WOOCOMMERCE */
+/* 1. Define columns position and names */
+add_filter( 'manage_edit-shop_order_columns', 'MY_COLUMNS_FUNCTION' );
+function MY_COLUMNS_FUNCTION($columns){
+    $new_columns = (is_array($columns)) ? $columns : array();
+    unset( $new_columns['order_actions'] );
 
+    //edit this for you column(s)
+    //all of your columns will be added before the actions column
+    $new_columns['MY_COLUMN_ID_1'] = 'WIRK COL';
+    $new_columns['MY_COLUMN_ID_2'] = 'WIRK COL 2';
+    //stop editing
 
+    $new_columns['order_actions'] = $columns['order_actions'];
+    return $new_columns;
+}
+
+/* 2. For each custom column, show the values */
+add_action( 'manage_shop_order_posts_custom_column', 'MY_COLUMNS_VALUES_FUNCTION', 2 );
+function MY_COLUMNS_VALUES_FUNCTION($column){
+    global $post;
+    $data = get_post_meta( $post->ID );
+
+    //start editing, I was saving my fields for the orders as custom post meta
+    //if you did the same, follow this code
+        /*if ( $column == 'MY_COLUMN_ID_1' ) {
+            echo (isset($data['MY_COLUMN_1_POST_META_ID']) ? $data['MY_COLUMN_1_POST_META_ID'] : '');
+        }
+        if ( $column == 'MY_COLUMN_ID_2' ) {
+            echo (isset($data['MY_COLUMN_2_POST_META_ID']) ? $data['MY_COLUMN_2_POST_META_ID'] : '');
+        }*/
+    //stop editing
+}
+
+/* 3. (optional) Function to make the columns sortable */
+add_filter( "manage_edit-shop_order_sortable_columns", 'MY_COLUMNS_SORT_FUNCTION' );
+function MY_COLUMNS_SORT_FUNCTION( $columns ) {
+    /*$custom = array(
+        //start editing
+
+        'MY_COLUMN_ID_1'    => 'MY_COLUMN_1_POST_META_ID',
+        'MY_COLUMN_ID_2'    => 'MY_COLUMN_2_POST_META_ID'
+
+        //stop editing
+    );
+    return wp_parse_args( $custom, $columns );*/
+}
 
 ?>
