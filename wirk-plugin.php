@@ -217,7 +217,15 @@ add_action( 'save_post', 'demo_sample_save_meta', 10, 3 );
 /* 1. Define columns position and names */
 add_filter( 'manage_edit-shop_order_columns', 'MY_COLUMNS_FUNCTION' );
 function MY_COLUMNS_FUNCTION($columns){
+
     $new_columns = (is_array($columns)) ? $columns : array();
+
+    // ADDING NEW COLUMNS AFTER "Purchased" COLUMN
+
+    // FIND POS OF COLUMN WITH Key "Purchased" /*TODO*/
+   /* ORIGINAL SAMPLE
+
+   $new_columns = (is_array($columns)) ? $columns : array();
     unset( $new_columns['order_actions'] );
 
     //edit this for you column(s)
@@ -227,18 +235,21 @@ function MY_COLUMNS_FUNCTION($columns){
     //stop editing
 
     $new_columns['order_actions'] = $columns['order_actions'];
-    return $new_columns;
+    return $new_columns;*/
 }
 
 /* 2. For each custom column, show the values */
 add_action( 'manage_shop_order_posts_custom_column', 'MY_COLUMNS_VALUES_FUNCTION', 2 );
 function MY_COLUMNS_VALUES_FUNCTION($column){
     global $post;
+
+    /* ORIGINAL SAMPLE CODE
+
     $data = get_post_meta( $post->ID );
 
     //start editing, I was saving my fields for the orders as custom post meta
     //if you did the same, follow this code
-        /*if ( $column == 'MY_COLUMN_ID_1' ) {
+        if ( $column == 'MY_COLUMN_ID_1' ) {
             echo (isset($data['MY_COLUMN_1_POST_META_ID']) ? $data['MY_COLUMN_1_POST_META_ID'] : '');
         }
         if ( $column == 'MY_COLUMN_ID_2' ) {
