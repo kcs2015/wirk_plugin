@@ -208,4 +208,13 @@ update_post_meta( $post_id, 'product_price', $product_price );*/
 
 
 add_action( 'save_post', 'demo_sample_save_meta', 10, 3 );
+
+/* ==============================*/
+/* ======= WOOCOMMERCE UPDATES =======*/
+/* ==============================*/
+
+/* ADD COLUMN TO WOOCOMMERCE */
+
+
+
 ?>
